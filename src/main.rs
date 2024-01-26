@@ -1,3 +1,4 @@
+use regex::Regex;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::process::Command;
@@ -17,7 +18,11 @@ fn get_compiler_version() -> String {
         .output()
         .expect("Failed command")
         .stdout;
-    String::from_utf8(output).expect("broken")
+    let matcher = Regex::new(r"\((.+)\)").unwrap();
+    let version = String::from_utf8(output).expect("broken");
+    println!("{}", version);
+    let caps = matcher.captures(&version).unwrap();
+    caps[1].to_string()
 }
 
 fn convert_text_to_binary(message: &String) -> String {
