@@ -71,7 +71,7 @@ fn get_time_since_date(date_str: &str) -> i64 {
 
 fn make_json_payload(message: &str, channel: &str) -> String {
     format!(
-        "{{\"channel\":{1}, \"text\":\"\", \"blocks\":[{{\"type\": \"section\",
+        "{{\"channel\":\"{1}\", \"text\":\"\", \"blocks\":[{{\"type\": \"section\",
             \"text\": {{
                 \"type\": \"mrkdwn\",
                 \"text\": \"{0}\"

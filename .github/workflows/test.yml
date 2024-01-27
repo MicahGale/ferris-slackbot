@@ -16,4 +16,4 @@ jobs:
       uses: hecrj/setup-rust-action@v2.0.0
       with:
         rust-version: nightly    
-    - run: cargo run 2024-01-01 123
+    - run: cargo run 2024-01-01 123a
