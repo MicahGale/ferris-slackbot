@@ -12,7 +12,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let i = get_time_since_date(&args[1]);
     let code_line = get_line_of_source(i);
-    println!("{}\n{}", binary_version, code_line);
+    println!("{}\n```\n{}\n```", binary_version, code_line);
 }
 
 fn get_compiler_version() -> String {
