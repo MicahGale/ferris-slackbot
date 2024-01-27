@@ -1,0 +1,19 @@
+name: Rust
+
+on: [push]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up a Rust toolchain
+      uses: hecrj/setup-rust-action@v2.0.0
+      with:
+        rust-version: nightly    
+    - run: cargo run 2024-01-01
