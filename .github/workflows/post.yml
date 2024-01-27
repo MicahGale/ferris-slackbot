@@ -10,14 +10,15 @@ jobs:
     environment: slack
 
     runs-on: ubuntu-latest
-
+    outputs:
+      message: ${{ steps.run.outputs.test }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up a Rust toolchain
       uses: hecrj/setup-rust-action@v2.0.0
       with:
         rust-version: nightly    
-    - run: cargo run 2024-01-26 ${{ secrets.SLACK_CHANNEL }}
+    - run: cargo run 2024-01-26 ${{ secrets.SLACK_CHANNEL }} >> $GITHUB_OUTPUT
       id: run
     - name: SlackBot postMessage
       uses: parkingboss/slackbot-postmessage@v1.2.0
