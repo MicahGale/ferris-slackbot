@@ -23,5 +23,5 @@ jobs:
       uses: parkingboss/slackbot-postmessage@v1.2.0
       with:
         token: ${{ secrets.SLACK_TOKEN }}
-        request: ${{ steps.run.outputs.* }}
+        request: ${{ steps.run.outputs }}
             
