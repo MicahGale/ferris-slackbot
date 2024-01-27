@@ -12,7 +12,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let i = get_time_since_date(&args[1]);
     let code_line = get_line_of_source(i);
-    let message = format!("{}\n```\n{}\n```", binary_version, code_line);
+    let message = format!("{}\\n```\\n{}\\n```", binary_version, code_line);
     println!("{}", make_json_payload(&message, &args[2]));
 }
 
@@ -71,13 +71,13 @@ fn get_time_since_date(date_str: &str) -> i64 {
 
 fn make_json_payload(message: &str, channel: &str) -> String {
     format!(
-        "channel={1}, text=\"\", blocks=[{{\"type\": \"section\",
+        "{{\"channel\":{1}, \"text\":\"\", \"blocks\":[{{\"type\": \"section\",
             \"text\": {{
                 \"type\": \"mrkdwn\",
-                \"text\": {0}
+                \"text\": \"{0}\"
             }}
         }}
-    ]",
+    ]}}",
         message, channel
     )
 }
