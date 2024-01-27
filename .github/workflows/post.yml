@@ -1,13 +1,13 @@
-name: Rust
+name: post
 
 on: [push]
 
 env:
   CARGO_TERM_COLOR: always
-  slack
 
 jobs:
-  build:
+  post:
+    environment: slack
 
     runs-on: ubuntu-latest
 
