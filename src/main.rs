@@ -1,6 +1,7 @@
 use chrono::{NaiveDate, NaiveTime, Utc};
 use chrono_tz::US::Central;
 use regex::Regex;
+use std::env;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::process::Command;
@@ -8,8 +9,8 @@ use std::process::Command;
 fn main() {
     let version = get_compiler_version();
     let binary_version = convert_text_to_binary(&version);
-    // TODO: take date from command line and get number of days.
-    let i = 1;
+    let args: Vec<String> = env::args().collect();
+    let i = get_time_since_date(&args[1]);
     let code_line = get_line_of_source(i);
     println!("{}\n{}", binary_version, code_line);
 }
