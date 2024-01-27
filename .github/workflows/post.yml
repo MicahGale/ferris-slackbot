@@ -18,11 +18,15 @@ jobs:
       uses: hecrj/setup-rust-action@v2.0.0
       with:
         rust-version: nightly    
-    - run: cargo run 2024-01-26 ${{ secrets.SLACK_CHANNEL }} >> $GITHUB_OUTPUT
+    - run: |
+            EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+            echo "text<<$EOF" >> $GITHUB_OUTPUT
+            cargo run 2024-01-26 ${{ secrets.SLACK_CHANNEL }} >> $GITHUB_OUTPUT
+            echo "$EOF" >> $GITHUB_OUTPUT
       id: run
     - name: SlackBot postMessage
       uses: parkingboss/slackbot-postmessage@v1.2.0
       with:
         token: ${{ secrets.SLACK_TOKEN }}
-        request: ${{ steps.run.outputs }}
+        request: ${{ steps.run.outputs.text }}
             
