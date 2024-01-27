@@ -1,6 +1,9 @@
 name: post
 
-on: [push]
+on:
+  schedule:
+    - cron:  '37 12 * * *'
+
 
 env:
   CARGO_TERM_COLOR: always
