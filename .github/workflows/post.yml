@@ -1,0 +1,27 @@
+name: Rust
+
+on: [push]
+
+env:
+  CARGO_TERM_COLOR: always
+  slack
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up a Rust toolchain
+      uses: hecrj/setup-rust-action@v2.0.0
+      with:
+        rust-version: nightly    
+    - run: cargo run 2024-01-26 ${{ secrets.SLACK_CHANNEL }}
+      id: run
+    - name: SlackBot postMessage
+      uses: parkingboss/slackbot-postmessage@v1.2.0
+      with:
+        token: ${{ secrets.SLACK_TOKEN }}
+        request: ${{ steps.run.outputs.* }}
+            
